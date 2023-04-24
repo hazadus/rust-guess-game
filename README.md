@@ -13,3 +13,9 @@
 - `cargo run`: Build and run.
 
 - `cargo check`: This command quickly checks your code to make sure it compiles but doesn’t produce an executable.
+
+- `cargo add rand`: add crate from `crates.io`, e.g. `rand`.
+
+## Rust Resources
+
+- [crates.io](https://crates.io/): Crates.io is where people in the Rust ecosystem post their open source Rust projects for others to use.
