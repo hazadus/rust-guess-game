@@ -1,7 +1,10 @@
-use std::io;
+use std::{io, cmp::Ordering};
 use rand::Rng;
 
 fn main() {
+    // The kind of range expression we’re using here takes the form start..=end and
+    // is inclusive on the lower and upper bounds, so we need to specify 1..=100
+    // to request a number between 1 and 100.
     let secret_number = rand::thread_rng().gen_range(1..=100);
 
     println!("Guess the number!");
@@ -17,6 +20,19 @@ fn main() {
         .read_line(&mut guess)
         .expect("Failed to read line");
 
-    print!("Your guess: {guess}");
-    print!("Secret is: {secret_number}")
+    // Rust allows us to shadow the previous value of guess with a new one.
+    // Shadowing lets us reuse the guess variable name rather than forcing us to create
+    // two unique variables, such as guess_str and guess, for example.
+    let guess: u32 = guess.trim().parse().expect("Please type a number!");
+
+    println!("Your guess: {guess}");
+    println!("Secret is: {secret_number}");
+
+    // A match expression is made up of arms. An arm consists of a pattern to match against,
+    // and the code that should be run if the value given to match fits that arm’s pattern.
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too small!"),
+        Ordering::Greater => println!("Too big!"),
+        Ordering::Equal => println!("You win!"),
+    }
 }
